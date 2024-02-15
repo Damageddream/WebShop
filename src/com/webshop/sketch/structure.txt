@@ -1,0 +1,24 @@
+Class Product - id, name, price, quantity // abstract?
+Class Computer - method configure (cpu, RAM, gpu, sd etc...)
+Class Smartphone - method configure (color, battery, camera, system, width etc...)
+Class Electronics - all else;
+
+Class ProductManager -add, remove, put, get, // using Cart
+Class Cart - Collection to hold, added products
+Class CartManager -
+Class Order - Client client, Cart cart, SumOfPrice
+Class OrderProcessor - get input through scanner//
+Class FV - Client client, Shop shop, price, tax, products with prices, date, date to pay.
+
+Class CalculateTime - methods - start counting, stop counting, process time of order
+Exception - NoSuchProductException, LackOfProductException, ProbeWithOrderProcessingException
+
+Class SaveOrder - create file, add to file,
+MultiThreading ??
+Async ??
+TimeAsync ??
+
+Class price / bonus, promotion, default
+
+Documentation
+
