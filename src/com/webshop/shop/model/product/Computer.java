@@ -1,55 +1,83 @@
 package com.webshop.shop.model.product;
 
+import com.webshop.shop.model.product.computerParts.Cpus;
+import com.webshop.shop.model.product.computerParts.Gpus;
+import com.webshop.shop.model.product.computerParts.Harddrives;
+import com.webshop.shop.model.product.computerParts.RAM;
+
+import java.util.Objects;
 import java.util.Scanner;
 
 public class Computer extends Product{
-    private String cpu;
-    private String gpu;
-    private String RAM;
-    private String harddrive;
+    private Cpus cpu;
+    private Gpus gpu;
+    private RAM ram;
+    private Harddrives harddrive;
 
-    private Computer(int id, String name, double price, int quantity, String cpu, String gpu, String RAM, String harddrive) {
-        super(id, name, price, quantity);
+    public Computer(String name, double price, int quantity, Cpus cpu, Gpus gpu, RAM ram, Harddrives harddrive) {
+        super(name, price, quantity);
         this.cpu = cpu;
         this.gpu = gpu;
-        this.RAM = RAM;
+        this.ram = ram;
         this.harddrive = harddrive;
     }
 
-    public String getCpu() {
+    public Cpus getCpu() {
         return cpu;
     }
 
-    private void setCpu(String cpu) {
+    public void setCpu(Cpus cpu) {
         this.cpu = cpu;
     }
 
-    public String getGpu() {
+    public Gpus getGpu() {
         return gpu;
     }
 
-    private void setGpu(String gpu) {
+    public void setGpu(Gpus gpu) {
         this.gpu = gpu;
     }
 
-    public String getRAM() {
-        return RAM;
+    public RAM getRam() {
+        return ram;
     }
 
-    private void setRAM(String RAM) {
-        this.RAM = RAM;
+    public void setRam(RAM ram) {
+        this.ram = ram;
     }
 
-    public String getHarddrive() {
+    public Harddrives getHarddrive() {
         return harddrive;
     }
 
-    private void setHarddrive(String harddrive) {
+    public void setHarddrive(Harddrives harddrive) {
         this.harddrive = harddrive;
     }
 
     @Override
-    void configure(Scanner sc) {
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        Computer computer = (Computer) o;
+        return cpu == computer.cpu && gpu == computer.gpu && ram == computer.ram && harddrive == computer.harddrive;
+    }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), cpu, gpu, ram, harddrive);
+    }
+
+    @Override
+    void configure() {
+
+    }
+
+    @Override
+    public String toString() {
+        return super.toString() +"\n"
+                +"Details: "+"cpu: "+cpu
+                +" gpu: "+gpu+" RAM: "+ram
+                +" harddrive: "+harddrive;
     }
 }
