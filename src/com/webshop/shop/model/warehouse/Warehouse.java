@@ -26,6 +26,12 @@ public class Warehouse {
 
     private static Random random = new Random();
 
+    Warehouse(){
+        this.computersInStock = supplyComputers();
+        this.smartphonesInStock = supplySmartphones();
+        this.electronicsInStock = supplyElectronics();
+    }
+
     // values for computer creation
     private static Cpus[] cpus = Cpus.values();
     private static Gpus[] gpus = Gpus.values();

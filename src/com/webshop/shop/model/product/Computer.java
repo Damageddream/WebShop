@@ -70,10 +70,6 @@ public class Computer extends Product{
         return Objects.hash(super.hashCode(), cpu, gpu, ram, harddrive);
     }
 
-    @Override
-    void configure() {
-
-    }
 
     @Override
     double calcluatePrice() {

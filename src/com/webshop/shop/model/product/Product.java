@@ -68,8 +68,7 @@ public abstract class Product {
         this.name = name;
         this.quantity = quantity;
     }
-    abstract void configure();
-    abstract double calcluatePrice();
 
+    abstract double calcluatePrice();
 
 }

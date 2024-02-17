@@ -1,5 +1,7 @@
 package com.webshop.shop.model.product.computerParts;
 
+import com.webshop.shop.exception.NoSuchOptionException;
+
 public enum Harddrives {
     BARRACUDA("Seagate Barracuda", 280),
     WESTERN("Western Digital Blue", 970),
@@ -20,5 +22,18 @@ public enum Harddrives {
     Harddrives(String name, double price) {
         this.name = name;
         this.price = price;
+    }
+    public static Harddrives createFromInt(int choice) throws NoSuchOptionException {
+        try{
+            return Harddrives.values()[choice];
+        } catch(ArrayIndexOutOfBoundsException e){
+            throw new NoSuchOptionException("No option by id "+choice);
+        }
+    }
+
+    public static void printHarddrives(){
+        for (Harddrives value : Harddrives.values()) {
+            System.out.println(value.name+" - "+value.ordinal());
+        }
     }
 }

@@ -55,11 +55,6 @@ public class Smartphone extends Product{
     }
 
     @Override
-    void configure() {
-
-    }
-
-    @Override
     double calcluatePrice() {
         return camera.getPrice()+color.getPrice()+ model.getPrice()+ storage.getPrice();
     }

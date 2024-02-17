@@ -12,10 +12,7 @@ public class Electronic extends Product{
         this.setPrice(calcluatePrice());
     }
 
-    @Override
-    void configure() {
 
-    }
 
     @Override
     double calcluatePrice() {

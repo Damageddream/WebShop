@@ -15,6 +15,36 @@ public class Order implements CsvConvertible {
     private Cart cart;
     private double priceToPay;
 
+    public Order(Client client, Cart cart, double priceToPay) {
+        this.client = client;
+        this.cart = cart;
+        this.priceToPay = priceToPay;
+    }
+
+    public Client getClient() {
+        return client;
+    }
+
+    public void setClient(Client client) {
+        this.client = client;
+    }
+
+    public Cart getCart() {
+        return cart;
+    }
+
+    public void setCart(Cart cart) {
+        this.cart = cart;
+    }
+
+    public double getPriceToPay() {
+        return priceToPay;
+    }
+
+    public void setPriceToPay(double priceToPay) {
+        this.priceToPay = priceToPay;
+    }
+
     @Override
     public String toCsv() {
         return null;
