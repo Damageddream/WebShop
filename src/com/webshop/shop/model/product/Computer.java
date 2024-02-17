@@ -9,17 +9,19 @@ import java.util.Objects;
 import java.util.Scanner;
 
 public class Computer extends Product{
+    private static final int MONTAGE_PRICE = 500;
     private Cpus cpu;
     private Gpus gpu;
     private RAM ram;
     private Harddrives harddrive;
 
-    public Computer(String name, double price, int quantity, Cpus cpu, Gpus gpu, RAM ram, Harddrives harddrive) {
-        super(name, price, quantity);
+    public Computer(String name, int quantity, Cpus cpu, Gpus gpu, RAM ram, Harddrives harddrive) {
+        super(name, quantity);
         this.cpu = cpu;
         this.gpu = gpu;
         this.ram = ram;
         this.harddrive = harddrive;
+        this.setPrice(calcluatePrice());
     }
 
     public Cpus getCpu() {
@@ -74,10 +76,15 @@ public class Computer extends Product{
     }
 
     @Override
+    double calcluatePrice() {
+        return cpu.getPrice()+gpu.getPrice()+ram.getPrice()+ harddrive.getPrice()+MONTAGE_PRICE;
+    }
+
+    @Override
     public String toString() {
         return super.toString() +"\n"
-                +"Details: "+"cpu: "+cpu
-                +" gpu: "+gpu+" RAM: "+ram
-                +" harddrive: "+harddrive;
+                +"Details: "+"cpu: "+cpu.getName()
+                +" gpu: "+gpu.getName()+" RAM: "+ram.getName()
+                +" harddrive: "+harddrive.getName();
     }
 }

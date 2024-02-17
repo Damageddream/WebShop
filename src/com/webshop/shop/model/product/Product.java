@@ -12,9 +12,9 @@ public abstract class Product {
 
     @Override
     public String toString() {
-        return ", name: '" + name +
-                ", price: " + price +"$" +
-                ", quantity: " + quantity;
+        return "Name: " + name +
+                " Price: " + price +"$" +
+                " Quantity: " + quantity;
     }
 
     @Override
@@ -62,13 +62,14 @@ public abstract class Product {
         this.quantity = quantity;
     }
 
-    public Product(String name, double price, int quantity) {
+    public Product(String name, int quantity) {
         this.id = idPool+1;
         Product.idPool += Product.idPool+1;
         this.name = name;
-        this.price = price;
         this.quantity = quantity;
     }
     abstract void configure();
+    abstract double calcluatePrice();
+
 
 }

@@ -40,7 +40,7 @@ public class Cart {
         return false;
     }
 
-    public void displayProducts(){
+    public void displayCart(){
         System.out.println("Right now in your cart are: ");
         cartProducts.forEach(System.out::println);
         System.out.println("and Total price is: "+totalPrice+"$");
