@@ -24,9 +24,21 @@ public class Warehouse {
     private List<Smartphone> smartphonesInStock;
     private List<Electronic> electronicsInStock;
 
+    public List<Computer> getComputersInStock() {
+        return computersInStock;
+    }
+
+    public List<Smartphone> getSmartphonesInStock() {
+        return smartphonesInStock;
+    }
+
+    public List<Electronic> getElectronicsInStock() {
+        return electronicsInStock;
+    }
+
     private static Random random = new Random();
 
-    Warehouse(){
+    public Warehouse(){
         this.computersInStock = supplyComputers();
         this.smartphonesInStock = supplySmartphones();
         this.electronicsInStock = supplyElectronics();

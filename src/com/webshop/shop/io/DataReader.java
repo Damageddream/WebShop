@@ -2,7 +2,6 @@ package com.webshop.shop.io;
 
 import com.webshop.shop.exception.NoSuchOptionException;
 import com.webshop.shop.model.product.Computer;
-import com.webshop.shop.model.product.Electronic;
 import com.webshop.shop.model.product.Smartphone;
 import com.webshop.shop.model.product.computerParts.Cpus;
 import com.webshop.shop.model.product.computerParts.Gpus;
