@@ -41,8 +41,16 @@ public class Cart {
     }
 
     public void displayCart(){
-        System.out.println("Right now in your cart are: ");
-        cartProducts.forEach(System.out::println);
-        System.out.println("and Total price is: "+totalPrice+"$");
+        if(cartProducts.isEmpty()){
+            System.out.println("Cart is empty");
+        } else {
+            System.out.println("Right now in your cart are: ");
+
+            cartProducts.forEach(product -> {
+                int productIndex = cartProducts.indexOf(product);
+                System.out.println(productIndex+" - "+product);
+            });
+            System.out.println("and Total price is: "+totalPrice+"$");
+        }
     }
 }

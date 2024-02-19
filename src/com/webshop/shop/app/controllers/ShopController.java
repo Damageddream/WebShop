@@ -25,37 +25,40 @@ public class ShopController {
             option = MainMenu.getOption(dataReader.getInt(), printer);
             switch (option) {
                 case EXIT -> {
-                    System.out.println("exit");
+                    printer.printLine("exit");
                 }
                 case SELECT_COMPUTER -> {
-                    selectComputer(cart, warehouse);
+                    selectComputer();
                 }
                 case SELECT_SMARTPHONE -> {
-                    System.out.println("select mob");
+                   selectSmartphone();
                 }
                 case SELECT_ELECTRONIC -> {
-                    System.out.println("select ele");
+                    selectElectronic();
                 }
                 case CART -> {
-                    System.out.printf("cart");
+                    cart();
                 }
             }
         }while(option != MainMenu.EXIT);
     }
-    private void selectComputer(Cart cart, Warehouse warehouse){
+    private void selectComputer(){
         ComputerController computerController = new ComputerController(printer, dataReader, cart, warehouse);
         computerController.computerLoop();
     }
     private void selectSmartphone(){
-        SmartphoneController smartphoneController = new SmartphoneController();
+        SmartphoneController smartphoneController = new SmartphoneController(printer, dataReader, cart, warehouse);
+        smartphoneController.smartPhoneLoop();
     }
 
     private void selectElectronic(){
-        ElectronicController electronicController = new ElectronicController();
+        ElectronicController electronicController = new ElectronicController(printer, dataReader, cart, warehouse);
+        electronicController.electronicsLoop();
     }
 
     private void cart(){
-        CartController cartController = new CartController();
+        CartController cartController = new CartController(printer, dataReader, cart, warehouse);
+        cartController.cartLoop();
     }
 
 }

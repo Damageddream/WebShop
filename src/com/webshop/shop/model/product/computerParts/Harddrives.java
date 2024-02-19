@@ -33,7 +33,7 @@ public enum Harddrives {
 
     public static void printHarddrives(){
         for (Harddrives value : Harddrives.values()) {
-            System.out.println(value.name+" - "+value.ordinal());
+            System.out.println(value.ordinal()+" - "+value.name);
         }
     }
 }

@@ -34,7 +34,7 @@ public enum ElectronicTypes  {
     }
     static void printElectronicTypes(){
         for (ElectronicTypes value : ElectronicTypes.values()) {
-            System.out.println(value.name+" - "+value.ordinal());
+            System.out.println(value.ordinal()+" - "+value.name);
         }
     }
 }

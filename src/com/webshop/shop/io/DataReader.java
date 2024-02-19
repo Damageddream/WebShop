@@ -1,6 +1,7 @@
 package com.webshop.shop.io;
 
 import com.webshop.shop.exception.NoSuchOptionException;
+import com.webshop.shop.model.client.Client;
 import com.webshop.shop.model.product.Computer;
 import com.webshop.shop.model.product.Smartphone;
 import com.webshop.shop.model.product.computerParts.Cpus;
@@ -68,6 +69,18 @@ public class DataReader {
         Storage.printStorages();
         Storage storage = Storage.createFromInt(getInt());
         return new Smartphone("Personalized smartphone", 1, camera, color, model, storage);
+    }
+
+    public Client readAndCreateUser(){
+        printer.printLine("Name: ");
+        String name = sc.nextLine();
+        printer.printLine("Last name: ");
+        String lastName = sc.nextLine();
+        printer.printLine("Address: ");
+        String address = sc.nextLine();
+        printer.printLine("E-mail: ");
+        String email = sc.nextLine();
+        return new Client(name, lastName, address, email);
     }
 
 }

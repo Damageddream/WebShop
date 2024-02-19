@@ -31,7 +31,7 @@ public enum Gpus {
     }
     public static void printGpus(){
         for (Gpus value : Gpus.values()) {
-            System.out.println(value.name+" - "+value.ordinal());
+            System.out.println(value.ordinal()+" - "+value.name);
         }
     }
 }

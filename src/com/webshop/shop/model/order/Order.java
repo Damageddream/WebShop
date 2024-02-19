@@ -7,18 +7,29 @@ import com.webshop.shop.model.client.Client;
 public class Order implements CsvConvertible {
     public static final String SHOP_DATA =
             """
-            Name: Web Shop
-            Adress: Beverly Hill 90210
-            E-mail: webshop@gmail.com
+            Name: Web Shop;
+            Adress: Beverly Hill 90210;
+            E-mail: webshop@gmail.com;
             """;
     private Client client;
     private Cart cart;
     private double priceToPay;
+    private boolean discount;
 
-    public Order(Client client, Cart cart, double priceToPay) {
+
+    public Order(Client client, Cart cart) {
         this.client = client;
         this.cart = cart;
-        this.priceToPay = priceToPay;
+        this.priceToPay = cart.getTotalPrice();
+        this.discount = false;
+    }
+
+    public boolean isDiscount() {
+        return discount;
+    }
+
+    public void setDiscount(boolean discount) {
+        this.discount = discount;
     }
 
     public Client getClient() {
@@ -49,4 +60,5 @@ public class Order implements CsvConvertible {
     public String toCsv() {
         return null;
     }
+
 }

@@ -31,7 +31,7 @@ public enum RAM {
     }
     public static void printRAM(){
         for (RAM value : RAM.values()) {
-            System.out.println(value.name+" - "+value.ordinal());
+            System.out.println(value.ordinal()+" - "+value.name);
         }
     }
 }

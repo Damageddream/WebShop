@@ -1,12 +1,14 @@
 package com.webshop.shop.app.controllers;
 
 import com.webshop.shop.app.controllers.options.ComputerMenu;
+import com.webshop.shop.exception.NoSuchOptionException;
 import com.webshop.shop.io.ConsolePrinter;
 import com.webshop.shop.io.DataReader;
 import com.webshop.shop.model.cart.Cart;
 import com.webshop.shop.model.product.Computer;
 import com.webshop.shop.model.warehouse.Warehouse;
 
+import java.util.InputMismatchException;
 import java.util.List;
 
 public class ComputerController {
@@ -38,8 +40,9 @@ public class ComputerController {
                     selectPreset();
                 }
                 case CONFIGURE -> {
-                    System.out.println("configure");
+                    configure();
                 }
+                default -> System.out.println("No such option, try again");
             }
         }while (option != ComputerMenu.GO_BACK);
     }
@@ -49,34 +52,52 @@ public class ComputerController {
         String option;
         do{
             for (int i = 0; i < computersInStock.size(); i++) {
-                System.out.println(i+" - "+computersInStock.get(i));
+                printer.printLine(i+" - "+computersInStock.get(i));
             }
-            System.out.println(5+" - Go back");
+            printer.printLine(5+" - Go back");
             option = dataReader.getString();
-            switch (option){
-                case "0"->{
-                    cart.addProduct(computersInStock.get(0));
+            switch (option) {
+                case "0" -> {
+                    addToCart(0, computersInStock);
                 }
-                case "1"->{
-                    cart.addProduct(computersInStock.get(1));
+                case "1" -> {
+                    addToCart(1, computersInStock);
                 }
-                case "2"->{
-                    cart.addProduct(computersInStock.get(2));
+                case "2" -> {
+                    addToCart(2, computersInStock);
                 }
-                case "3"->{
-                    cart.addProduct(computersInStock.get(3));
+                case "3" -> {
+                    addToCart(3, computersInStock);
                 }
-                case "4"->{
-                    cart.addProduct(computersInStock.get(4));
+                case "4" -> {
+                    addToCart(4, computersInStock);
                 }
-                case "5"->{
+                case "5" -> {
                     option = "5";
                 }
-            }while (option.equals("5"));
-        }
-
+            }
+        }while(!option.equals("5"));
 
     }
 
+    private void addToCart(int num, List<Computer> computersInStock){
+        cart.addProduct(computersInStock.get(num));
+        System.out.println("Computer added to cart");
+    }
 
+    private void configure(){
+        boolean working = true;
+        while (working){
+            try {
+                Computer comp = dataReader.readAndCreateComputer();
+                cart.addProduct(comp);
+                System.out.println("computer added to cart");
+                working = false;
+            } catch (NoSuchOptionException e) {
+                printer.printLine(e.getMessage() + ", try again:");
+            } catch (InputMismatchException e) {
+                printer.printLine("No number input, try again:");
+            }
+        }
+    }
 }

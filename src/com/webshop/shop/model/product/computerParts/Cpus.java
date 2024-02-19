@@ -32,7 +32,7 @@ public enum Cpus  {
 
     public static void printCpus(){
         for (Cpus value : Cpus.values()) {
-            System.out.println(value.name+" - "+value.ordinal());
+            System.out.println(value.ordinal()+" - "+value.name);
         }
     }
 

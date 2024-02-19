@@ -32,7 +32,7 @@ public enum Camera {
     }
     public static void printCameras(){
         for (Camera value : Camera.values()) {
-            System.out.println(value.name+" - "+value.ordinal());
+            System.out.println(value.ordinal()+" - "+value.name);
         }
     }
 }
