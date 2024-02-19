@@ -58,7 +58,8 @@ public class Order implements CsvConvertible {
 
     @Override
     public String toCsv() {
-        return null;
+        return SHOP_DATA+
+                priceToPay+";";
     }
 
 }

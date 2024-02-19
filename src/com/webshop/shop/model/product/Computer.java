@@ -83,4 +83,14 @@ public class Computer extends Product{
                 +" gpu: "+gpu.getName()+" RAM: "+ram.getName()
                 +" harddrive: "+harddrive.getName();
     }
+
+    @Override
+    public String toCsv() {
+        return cpu.getName()+";"+
+                gpu.getName()+";"+
+                ram.getName()+";"+
+            harddrive.getName()+";"+
+                getName()+";"+
+                getPrice()+";";
+    }
 }

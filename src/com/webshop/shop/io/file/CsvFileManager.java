@@ -1,35 +1,43 @@
 package com.webshop.shop.io.file;
 
-import com.webshop.shop.model.cart.Cart;
+import com.webshop.shop.exception.DataExportException;
+import com.webshop.shop.model.client.Client;
 import com.webshop.shop.model.order.Order;
+import com.webshop.shop.model.product.Product;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.Collection;
+import java.util.List;
 
 public class CsvFileManager {
-
-
-
-
-
-
+    private static int FV_ID_POOL = 1;
     private void exportToCsv(Order order, String fileName) {
-        String shopData = Order.SHOP_DATA;
-        String client = order.getClient().toString();
-        double price = order.getPriceToPay();
-        Cart cart = order.getCart();
-
+        Client client = order.getClient();
+        List<Product> products = order.getCart().getCartProducts();
         try (FileWriter fileWriter = new FileWriter(fileName);
              BufferedWriter bufferedWriter = new BufferedWriter(fileWriter)) {
-            for (T element : collection) {
-                bufferedWriter.write(element.toCsv());
+                bufferedWriter.write(client.toCsv());
+                bufferedWriter.newLine();
+                bufferedWriter.write(order.toCsv());
+                bufferedWriter.newLine();
+            for (Product product : products) {
+                bufferedWriter.write(product.toCsv());
                 bufferedWriter.newLine();
             }
         } catch (IOException e) {
-            throw new DataExportException("Błąd zapisu danych do pliku " + fileName);
+            throw new DataExportException("Error in data saving " + fileName);
         }
+    }
+
+    private String createFileName(Order order){
+        String fileName = order.getClient().getLastName()+"/"+FV_ID_POOL;
+        FV_ID_POOL++;
+        return fileName;
+    }
+
+    public void exportOrder(Order order){
+        exportToCsv(order, createFileName(order));
     }
 
 }

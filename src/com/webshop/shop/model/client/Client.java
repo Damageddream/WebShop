@@ -1,5 +1,9 @@
 package com.webshop.shop.model.client;
-public class Client {
+
+import com.webshop.shop.io.file.CsvFileManager;
+import com.webshop.shop.model.CsvConvertible;
+
+public class Client implements CsvConvertible {
     private String name;
     private String lastName;
     private String address;
@@ -50,5 +54,13 @@ public class Client {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    @Override
+    public String toCsv() {
+        return name+";"+
+                lastName+";"+
+                address+";"+
+                email+";";
     }
 }

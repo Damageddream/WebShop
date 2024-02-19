@@ -66,4 +66,13 @@ public class Smartphone extends Product{
                 +" color: "+color.getName()+" camera: "+camera.getName()
                 +" storage: "+storage.getName();
     }
+    @Override
+    public String toCsv() {
+        return camera.getName()+";"+
+                color.getName()+";"+
+                model.getName()+";"+
+                storage.getName()+";"+
+                getName()+";"+
+                getPrice()+";";
+    }
 }

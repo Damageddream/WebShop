@@ -1,9 +1,11 @@
 package com.webshop.shop.model.product;
 
+import com.webshop.shop.model.CsvConvertible;
+
 import java.util.Objects;
 import java.util.Scanner;
 
-public abstract class Product {
+public abstract class Product implements CsvConvertible {
     private static int idPool = 0;
     private int id;
     private String name;

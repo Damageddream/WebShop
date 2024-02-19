@@ -1,11 +1,12 @@
 package com.webshop.shop.model.cart;
 
+import com.webshop.shop.model.CsvConvertible;
 import com.webshop.shop.model.product.Product;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Cart {
+public class Cart implements CsvConvertible {
 
     private List<Product> cartProducts;
     private double totalPrice;
@@ -52,5 +53,10 @@ public class Cart {
             });
             System.out.println("and Total price is: "+totalPrice+"$");
         }
+    }
+
+    @Override
+    public String toCsv() {
+        return null;
     }
 }

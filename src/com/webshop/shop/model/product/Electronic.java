@@ -24,4 +24,11 @@ public class Electronic extends Product{
         return super.toString() +"\n"
                 +"Details: "+electronic.getName();
     }
+
+    @Override
+    public String toCsv() {
+        return electronic.getName()+";"+
+                getName()+";"+
+                getPrice()+";";
+    }
 }
