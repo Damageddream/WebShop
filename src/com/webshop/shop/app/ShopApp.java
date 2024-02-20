@@ -14,5 +14,6 @@ public class ShopApp {
         System.out.println(APP_NAME);
         ShopController shopControl = new ShopController();
         shopControl.mainLoop();
+        shopControl.close();
     }
 }

@@ -31,7 +31,7 @@ public class CsvFileManager {
     }
 
     private String createFileName(Order order){
-        String fileName = order.getClient().getLastName()+"/"+FV_ID_POOL;
+        String fileName = order.getClient().getLastName()+"_"+FV_ID_POOL+".csv";
         FV_ID_POOL++;
         return fileName;
     }

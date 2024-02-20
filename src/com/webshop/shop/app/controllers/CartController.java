@@ -4,22 +4,27 @@ import com.webshop.shop.app.controllers.options.CartMenu;
 import com.webshop.shop.io.ConsolePrinter;
 import com.webshop.shop.io.DataReader;
 import com.webshop.shop.model.cart.Cart;
+import com.webshop.shop.model.client.Client;
 import com.webshop.shop.model.warehouse.Warehouse;
 
 import java.util.InputMismatchException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Future;
 
 public class CartController {
 
     private ConsolePrinter printer;
     private DataReader dataReader;
     private Cart cart;
-    private Warehouse warehouse;
 
-    public CartController(ConsolePrinter printer, DataReader dataReader, Cart cart, Warehouse warehouse) {
+    private ExecutorService executor;
+
+
+    public CartController(ConsolePrinter printer, DataReader dataReader, Cart cart, ExecutorService executor) {
         this.printer = printer;
         this.dataReader = dataReader;
         this.cart = cart;
-        this.warehouse = warehouse;
+        this.executor = executor;
     }
     public void cartLoop(){
         CartMenu option;
@@ -67,6 +72,7 @@ public class CartController {
         }while (option != cartSize);
     }
     void processOrder(){
-
+        Client client = dataReader.readAndCreateUser();
+        Future future = executor.submit(new OrderProcessor(client, cart));
     }
 }

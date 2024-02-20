@@ -2,6 +2,7 @@ package com.webshop.shop.model.warehouse;
 
 import com.webshop.shop.model.product.Computer;
 import com.webshop.shop.model.product.Electronic;
+import com.webshop.shop.model.product.Product;
 import com.webshop.shop.model.product.Smartphone;
 import com.webshop.shop.model.product.computerParts.Cpus;
 import com.webshop.shop.model.product.computerParts.Gpus;
@@ -99,6 +100,9 @@ public class Warehouse {
             electronics.add(electronic);
         }
         return electronics;
+    }
+    public void removeProduct(Product product){
+
     }
 
 }

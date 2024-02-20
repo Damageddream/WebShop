@@ -6,9 +6,15 @@ import com.webshop.shop.io.DataReader;
 import com.webshop.shop.model.cart.Cart;
 import com.webshop.shop.model.warehouse.Warehouse;
 
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
+
 public class ShopController {
     private ConsolePrinter printer = new ConsolePrinter();
     private DataReader dataReader = new DataReader(printer);
+    private ExecutorService executor = Executors.newFixedThreadPool(4);
+
 
     private Cart cart;
     private Warehouse warehouse;
@@ -57,8 +63,24 @@ public class ShopController {
     }
 
     private void cart(){
-        CartController cartController = new CartController(printer, dataReader, cart, warehouse);
+        CartController cartController = new CartController(printer, dataReader, cart, executor);
         cartController.cartLoop();
+    }
+
+    private void shutdown(){
+        executor.shutdown();
+        try{
+            if(!executor.awaitTermination(5, TimeUnit.SECONDS)){
+                executor.shutdown();
+            }
+        }catch(InterruptedException e){
+            executor.shutdownNow();
+            Thread.currentThread().interrupt();
+        }
+    }
+    public void close(){
+        shutdown();
+        dataReader.close();
     }
 
 }
