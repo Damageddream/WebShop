@@ -1,5 +1,6 @@
 package com.webshop.shop.model.cart;
 
+import com.webshop.shop.exception.ProductUnvaliableException;
 import com.webshop.shop.model.CsvConvertible;
 import com.webshop.shop.model.product.Product;
 
@@ -27,9 +28,14 @@ public class Cart implements CsvConvertible {
     public List<Product> getCartProducts() {
         return cartProducts;
     }
-    public void addProduct(Product product){
-        cartProducts.add(product);
-        totalPrice += totalPrice + product.getPrice();
+    public void addProduct(Product product) throws ProductUnvaliableException {
+        if(product.isAvailable()){
+            cartProducts.add(product);
+            product.setQuantity(product.getQuantity()-1);
+            totalPrice += totalPrice + product.getPrice();
+        }else{
+            throw new ProductUnvaliableException("Product not currently available, choose something else");
+        }
     }
 
     public boolean removeProduct(Product product){

@@ -2,17 +2,18 @@ package com.webshop.shop.app.controllers;
 
 import com.webshop.shop.app.controllers.options.ComputerMenu;
 import com.webshop.shop.exception.NoSuchOptionException;
+import com.webshop.shop.exception.ProductUnvaliableException;
 import com.webshop.shop.io.ConsolePrinter;
 import com.webshop.shop.io.DataReader;
 import com.webshop.shop.model.cart.Cart;
 import com.webshop.shop.model.product.Computer;
+import com.webshop.shop.model.product.Product;
 import com.webshop.shop.model.warehouse.Warehouse;
 
 import java.util.InputMismatchException;
 import java.util.List;
 
 public class ComputerController {
-
     private ConsolePrinter printer;
     private DataReader dataReader;
     private Cart cart;
@@ -52,7 +53,8 @@ public class ComputerController {
         String option;
         do{
             for (int i = 0; i < computersInStock.size(); i++) {
-                printer.printLine(i+" - "+computersInStock.get(i));
+                Computer computer = computersInStock.get(i);
+                printer.printLine(i+" - "+computer+" quantity: "+computer.getQuantity());
             }
             printer.printLine(5+" - Go back");
             option = dataReader.getString();
@@ -77,26 +79,29 @@ public class ComputerController {
                 }
             }
         }while(!option.equals("5"));
-
     }
-
     private void addToCart(int num, List<Computer> computersInStock){
-        cart.addProduct(computersInStock.get(num));
-        System.out.println("Computer added to cart");
+        try{
+            cart.addProduct(computersInStock.get(num));
+            printer.printLine("Computer added to cart");
+        }catch (ProductUnvaliableException e){
+            printer.printLine(e.getMessage());
+        }
     }
-
     private void configure(){
         boolean working = true;
         while (working){
             try {
                 Computer comp = dataReader.readAndCreateComputer();
                 cart.addProduct(comp);
-                System.out.println("computer added to cart");
+                printer.printLine("computer added to cart");
                 working = false;
             } catch (NoSuchOptionException e) {
                 printer.printLine(e.getMessage() + ", try again:");
             } catch (InputMismatchException e) {
                 printer.printLine("No number input, try again:");
+            } catch (ProductUnvaliableException e){
+                printer.printLine(e.getMessage());
             }
         }
     }

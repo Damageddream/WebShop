@@ -2,6 +2,7 @@ package com.webshop.shop.app.controllers;
 
 import com.webshop.shop.app.controllers.options.ElectronicsMenu;
 import com.webshop.shop.app.controllers.options.SmartphoneMenu;
+import com.webshop.shop.exception.ProductUnvaliableException;
 import com.webshop.shop.io.ConsolePrinter;
 import com.webshop.shop.io.DataReader;
 import com.webshop.shop.model.cart.Cart;
@@ -36,7 +37,7 @@ public class ElectronicController {
                 case SELECT_PRESET -> {
                     selectPreset();
                 }
-                default -> System.out.println("No such option, try again");
+                default -> printer.printLine("No such option, try again");
             }
         } while (option != ElectronicsMenu.GO_BACK);
     }
@@ -45,9 +46,10 @@ public class ElectronicController {
         String option;
         do {
             for (int i = 0; i < electonicsInStock.size(); i++) {
-                System.out.println(i + " - " + electonicsInStock.get(i));
+                Electronic electronic = electonicsInStock.get(i);
+                printer.printLine(i + " - " + electronic+" quantity: "+electronic.getQuantity());
             }
-            System.out.println(5 + " - Go back");
+            printer.printLine(5 + " - Go back");
             option = dataReader.getString();
             switch (option) {
                 case "0" -> {
@@ -72,7 +74,11 @@ public class ElectronicController {
         } while (!option.equals("5"));
     }
     private void addToCart(int num, List<Electronic> electonicsInStock){
-        cart.addProduct(electonicsInStock.get(num));
-        System.out.println("Electronic added to cart");
+        try{
+            cart.addProduct(electonicsInStock.get(num));
+            printer.printLine("Electronic added to cart");
+        } catch (ProductUnvaliableException e){
+            printer.printLine(e.getMessage());
+        }
     }
 }

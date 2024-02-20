@@ -15,8 +15,7 @@ public abstract class Product implements CsvConvertible {
     @Override
     public String toString() {
         return "Name: " + name +
-                " Price: " + price +"$" +
-                " Quantity: " + quantity;
+                " Price: " + price +"$";
     }
 
     @Override
@@ -72,5 +71,12 @@ public abstract class Product implements CsvConvertible {
     }
 
     abstract double calcluatePrice();
+
+    public boolean isAvailable(){
+        if(quantity>0){
+            return true;
+        }
+        return false;
+    }
 
 }

@@ -101,8 +101,14 @@ public class Warehouse {
         }
         return electronics;
     }
-    public void removeProduct(Product product){
-
+    public void removeProduct(Product product, List<Product> list){
+        list.remove(product);
     }
-
+    public void addProduct(Product product, List<Product> list){
+        list.add(product);
+    }
+    public void updateProduct(Product productToUpdate,Product updatedProduct, List<Product> list){
+        int index = list.indexOf(productToUpdate);
+        list.set(index, updatedProduct);
+    }
 }

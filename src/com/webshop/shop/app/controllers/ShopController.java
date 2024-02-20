@@ -3,6 +3,7 @@ package com.webshop.shop.app.controllers;
 import com.webshop.shop.app.controllers.options.MainMenu;
 import com.webshop.shop.io.ConsolePrinter;
 import com.webshop.shop.io.DataReader;
+import com.webshop.shop.io.OrderTimeTracker;
 import com.webshop.shop.model.cart.Cart;
 import com.webshop.shop.model.warehouse.Warehouse;
 
@@ -14,7 +15,7 @@ public class ShopController {
     private ConsolePrinter printer = new ConsolePrinter();
     private DataReader dataReader = new DataReader(printer);
     private ExecutorService executor = Executors.newFixedThreadPool(4);
-
+    private OrderTimeTracker orderTimeTracker = new OrderTimeTracker();
 
     private Cart cart;
     private Warehouse warehouse;
@@ -25,6 +26,7 @@ public class ShopController {
     }
 
     public void mainLoop(){
+        orderTimeTracker.trackingStart();
         MainMenu option;
         do{
             MainMenu.printMainMenu(printer);
@@ -78,7 +80,12 @@ public class ShopController {
             Thread.currentThread().interrupt();
         }
     }
+    private void calculateOrderTime(){
+        orderTimeTracker.trackingEnd();
+        orderTimeTracker.getOrderDuration();
+    }
     public void close(){
+        calculateOrderTime();
         shutdown();
         dataReader.close();
     }

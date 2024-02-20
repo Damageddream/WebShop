@@ -19,11 +19,11 @@ public class OrderProcessor implements Runnable {
 
     private void process(Order order){
         try{
+            order.checkAndApplyDiscount();
             csvFileManager.exportOrder(order);
         }catch(DataExportException e){
             System.out.println(e.getMessage());
         }
-
     }
 
     @Override

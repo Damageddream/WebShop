@@ -4,6 +4,9 @@ import com.webshop.shop.model.CsvConvertible;
 import com.webshop.shop.model.cart.Cart;
 import com.webshop.shop.model.client.Client;
 
+import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
+
 public class Order implements CsvConvertible {
     public static final String SHOP_DATA =
             """
@@ -14,22 +17,14 @@ public class Order implements CsvConvertible {
     private Client client;
     private Cart cart;
     private double priceToPay;
-    private boolean discount;
 
+    private ZonedDateTime dateTime;
 
     public Order(Client client, Cart cart) {
         this.client = client;
         this.cart = cart;
         this.priceToPay = cart.getTotalPrice();
-        this.discount = false;
-    }
-
-    public boolean isDiscount() {
-        return discount;
-    }
-
-    public void setDiscount(boolean discount) {
-        this.discount = discount;
+        dateTime =ZonedDateTime.now(client.getUserTimeZone());
     }
 
     public Client getClient() {
@@ -56,10 +51,19 @@ public class Order implements CsvConvertible {
         this.priceToPay = priceToPay;
     }
 
+    public void checkAndApplyDiscount(){
+        double cartTotalPrice = cart.getTotalPrice();
+        if(cartTotalPrice > 10000){
+            cart.setTotalPrice(cartTotalPrice+(cartTotalPrice*0.15));
+            System.out.println("We implemented discount 15% to your order!");
+        }
+    }
+
     @Override
     public String toCsv() {
         return SHOP_DATA+
-                priceToPay+";";
+                priceToPay+";"
+                +dateTime+";";
     }
 
 }

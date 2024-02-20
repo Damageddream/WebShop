@@ -2,6 +2,7 @@ package com.webshop.shop.app.controllers;
 
 import com.webshop.shop.app.controllers.options.SmartphoneMenu;
 import com.webshop.shop.exception.NoSuchOptionException;
+import com.webshop.shop.exception.ProductUnvaliableException;
 import com.webshop.shop.io.ConsolePrinter;
 import com.webshop.shop.io.DataReader;
 import com.webshop.shop.model.cart.Cart;
@@ -39,17 +40,17 @@ public class SmartphoneController {
                 case CONFIGURE -> {
                     configure();
                 }
-                default -> System.out.println("No such option, try again");
+                default -> printer.printLine("No such option, try again");
             }
         } while (option != SmartphoneMenu.GO_BACK);
     }
-
     private void selectPreset() {
         List<Smartphone> smartphonesInStock = warehouse.getSmartphonesInStock();
         String option;
         do {
             for (int i = 0; i < smartphonesInStock.size(); i++) {
-                System.out.println(i + " - " + smartphonesInStock.get(i));
+                Smartphone smartphone = smartphonesInStock.get(i);
+                printer.printLine(i + " - " + smartphone+" quantity: "+smartphone.getQuantity());
             }
             System.out.println(5 + " - Go back");
             option = dataReader.getString();
@@ -77,24 +78,29 @@ public class SmartphoneController {
     }
 
     private void addToCart(int num, List<Smartphone> smartphonesInStock){
-        cart.addProduct(smartphonesInStock.get(num));
-        System.out.println("Smartphone added to cart");
-    }
+        try{
+            cart.addProduct(smartphonesInStock.get(num));
+            printer.printLine("Smartphone added to cart");
+        }catch(ProductUnvaliableException e){
+            printer.printLine(e.getMessage());
 
+        }
+    }
     private void configure() {
         boolean working = true;
         while (working) {
             try {
                 Smartphone smartphone = dataReader.readAndCreateSmartphone();
                 cart.addProduct(smartphone);
-                System.out.println("smartphone added to cart");
+                printer.printLine("smartphone added to cart");
                 working = false;
             } catch (NoSuchOptionException e) {
                 printer.printLine(e.getMessage() + ", try again:");
             } catch (InputMismatchException e) {
                 printer.printLine("No number input, try again:");
+            } catch(ProductUnvaliableException e){
+                printer.printLine(e.getMessage());
             }
         }
-
     }
 }

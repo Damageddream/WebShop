@@ -3,11 +3,14 @@ package com.webshop.shop.model.client;
 import com.webshop.shop.io.file.CsvFileManager;
 import com.webshop.shop.model.CsvConvertible;
 
+import java.time.ZoneId;
+
 public class Client implements CsvConvertible {
     private String name;
     private String lastName;
     private String address;
     private String email;
+    private ZoneId userTimeZone;
 
     public String getEmail() {
         return email;
@@ -22,6 +25,11 @@ public class Client implements CsvConvertible {
         this.lastName = lastName;
         this.address = address;
         this.email = email;
+        this.userTimeZone = ZoneId.systemDefault();
+    }
+
+    public ZoneId getUserTimeZone() {
+        return userTimeZone;
     }
 
     @Override

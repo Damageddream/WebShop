@@ -73,6 +73,6 @@ public class CartController {
     }
     void processOrder(){
         Client client = dataReader.readAndCreateUser();
-        Future future = executor.submit(new OrderProcessor(client, cart));
+        executor.submit(new OrderProcessor(client, cart));
     }
 }
