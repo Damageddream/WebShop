@@ -24,18 +24,21 @@ public class SmartphoneController {
         this.cart = cart;
         this.warehouse = warehouse;
     }
-
     public void smartPhoneLoop() {
         SmartphoneMenu option;
         do {
             SmartphoneMenu.printComputerMenu(printer);
-            option = SmartphoneMenu.getOption(dataReader.getInt(), printer);
+            option = SmartphoneMenu.getOption(dataReader, printer);
             switch (option) {
                 case GO_BACK -> {
                     System.out.println("go back");
                 }
                 case SELECT_PRESET -> {
-                    selectPreset();
+                    try{
+                        selectPreset();
+                    }catch (InputMismatchException e){
+                        printer.printLine("Invalid input try again");
+                    }
                 }
                 case CONFIGURE -> {
                     configure();
@@ -73,10 +76,10 @@ public class SmartphoneController {
                 case "5" -> {
                     option = "5";
                 }
+                default -> printer.printLine("No such option, choose again");
             }
         } while (!option.equals("5"));
     }
-
     private void addToCart(int num, List<Smartphone> smartphonesInStock){
         try{
             cart.addProduct(smartphonesInStock.get(num));

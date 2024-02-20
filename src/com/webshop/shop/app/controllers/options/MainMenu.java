@@ -2,6 +2,7 @@ package com.webshop.shop.app.controllers.options;
 
 import com.webshop.shop.exception.NoSuchOptionException;
 import com.webshop.shop.io.ConsolePrinter;
+import com.webshop.shop.io.DataReader;
 
 import java.util.InputMismatchException;
 
@@ -35,17 +36,18 @@ public enum MainMenu {
         }
     }
 
-    public static MainMenu getOption(int num, ConsolePrinter printer) {
+    public static MainMenu getOption(DataReader dataReader, ConsolePrinter printer) {
         boolean optionOk = false;
         MainMenu option = null;
         while (!optionOk) {
             try {
+                int num = dataReader.getInt();
                 option = MainMenu.createFromInt(num);
                 optionOk = true;
             } catch (NoSuchOptionException e) {
-                printer.printLine(e.getMessage() + ", choose :");
-            } catch (InputMismatchException ignored) {
-                printer.printLine("Your choice is not a number, choose again:");
+                printer.printLine(e.getMessage() + ", choose again.");
+            } catch (InputMismatchException e) {
+                printer.printLine("Your choice is not a number, choose again.");
             }
         }
         return option;

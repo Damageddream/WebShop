@@ -32,18 +32,21 @@ public class ComputerController {
         ComputerMenu option;
         do{
             ComputerMenu.printComputerMenu(printer);
-            option = ComputerMenu.getOption(dataReader.getInt(), printer);
+            option = ComputerMenu.getOption(dataReader, printer);
             switch (option) {
                 case GO_BACK -> {
-                    System.out.println("go back");
+                    printer.printLine("go back");
                 }
                 case SELECT_PRESET -> {
-                    selectPreset();
+                    try{
+                        selectPreset();
+                    }catch (InputMismatchException e){
+                        printer.printLine("Invalid input try again");
+                    }
                 }
                 case CONFIGURE -> {
                     configure();
                 }
-                default -> System.out.println("No such option, try again");
             }
         }while (option != ComputerMenu.GO_BACK);
     }
@@ -77,6 +80,8 @@ public class ComputerController {
                 case "5" -> {
                     option = "5";
                 }
+                default -> printer.printLine("No such option, choose again");
+
             }
         }while(!option.equals("5"));
     }

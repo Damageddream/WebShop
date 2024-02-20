@@ -30,10 +30,10 @@ public class ShopController {
         MainMenu option;
         do{
             MainMenu.printMainMenu(printer);
-            option = MainMenu.getOption(dataReader.getInt(), printer);
+            option = MainMenu.getOption(dataReader, printer);
             switch (option) {
                 case EXIT -> {
-                    printer.printLine("exit");
+                    printer.printLine("Thank you for shopping, come again !"+" \uD83D\uDE01");
                 }
                 case SELECT_COMPUTER -> {
                     selectComputer();
@@ -47,6 +47,7 @@ public class ShopController {
                 case CART -> {
                     cart();
                 }
+
             }
         }while(option != MainMenu.EXIT);
     }

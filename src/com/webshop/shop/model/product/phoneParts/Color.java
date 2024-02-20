@@ -36,7 +36,7 @@ public enum Color  {
 
     public static void printColors(){
         for (Color value : Color.values()) {
-            System.out.println(value.name+" - "+value.ordinal());
+            System.out.println(value.ordinal()+" - "+value.name);
         }
     }
 }

@@ -32,7 +32,7 @@ public enum Model  {
     }
     public static void printModels(){
         for (Model value : Model.values()) {
-            System.out.println(value.name+" - "+value.ordinal());
+            System.out.println(value.ordinal()+" - "+value.name);
         }
     }
 }

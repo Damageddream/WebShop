@@ -5,11 +5,10 @@ import com.webshop.shop.io.ConsolePrinter;
 import com.webshop.shop.io.DataReader;
 import com.webshop.shop.model.cart.Cart;
 import com.webshop.shop.model.client.Client;
-import com.webshop.shop.model.warehouse.Warehouse;
 
 import java.util.InputMismatchException;
 import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Future;
+
 
 public class CartController {
 
@@ -30,7 +29,7 @@ public class CartController {
         CartMenu option;
         do{
             CartMenu.printCartMenu(printer);
-            option = CartMenu.getOption(dataReader.getInt(), printer);
+            option = CartMenu.getOption(dataReader, printer);
             switch (option) {
                 case GO_BACK -> {
                     printer.printLine("go back");
@@ -45,7 +44,6 @@ public class CartController {
             }
         }while (option != CartMenu.GO_BACK);
     }
-
     void displayCart(){
         int option = 0;
         int cartSize = cart.getCartProducts().size();

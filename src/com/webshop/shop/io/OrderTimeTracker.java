@@ -7,13 +7,6 @@ public class OrderTimeTracker {
     private LocalDateTime startTracking;
     private LocalDateTime finishTracking;
 
-    public LocalDateTime getStartTracking() {
-        return startTracking;
-    }
-
-    public LocalDateTime getFinishTracking() {
-        return finishTracking;
-    }
 
     public void trackingStart(){
         startTracking = LocalDateTime.now();
@@ -24,7 +17,6 @@ public class OrderTimeTracker {
 
     public void getOrderDuration(){
         Duration difference = Duration.between(startTracking, finishTracking);
-        System.out.println("Time to make your order was: "+difference.toSeconds()+" seconds");
+        System.out.println("Time to make your order was: "+difference.toSeconds()+" seconds \uD83D\uDD66");
     }
-
 }

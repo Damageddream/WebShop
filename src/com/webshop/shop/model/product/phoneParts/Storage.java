@@ -33,7 +33,7 @@ public enum Storage  {
     }
     public static void printStorages(){
         for (Storage value : Storage.values()) {
-            System.out.println(value.name+" - "+value.ordinal());
+            System.out.println(value.ordinal()+" - "+value.name);
         }
     }
 }

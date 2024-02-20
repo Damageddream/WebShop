@@ -10,6 +10,7 @@ import com.webshop.shop.model.product.Electronic;
 import com.webshop.shop.model.product.Smartphone;
 import com.webshop.shop.model.warehouse.Warehouse;
 
+import java.util.InputMismatchException;
 import java.util.List;
 
 public class ElectronicController {
@@ -29,13 +30,17 @@ public class ElectronicController {
         ElectronicsMenu option;
         do {
             ElectronicsMenu.printComputerMenu(printer);
-            option = ElectronicsMenu.getOption(dataReader.getInt(), printer);
+            option = ElectronicsMenu.getOption(dataReader, printer);
             switch (option) {
                 case GO_BACK -> {
                     System.out.println("go back");
                 }
                 case SELECT_PRESET -> {
-                    selectPreset();
+                    try{
+                        selectPreset();
+                    }catch (InputMismatchException e){
+                        printer.printLine("Invalid input try again");
+                    }
                 }
                 default -> printer.printLine("No such option, try again");
             }
@@ -70,6 +75,7 @@ public class ElectronicController {
                 case "5" -> {
                     option = "5";
                 }
+                default -> printer.printLine("No such option, choose again");
             }
         } while (!option.equals("5"));
     }
