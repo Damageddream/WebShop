@@ -1,7 +1,7 @@
 package com.webshop.shop.model.product.electronicTypes;
 
 import com.webshop.shop.exception.NoSuchOptionException;
-import com.webshop.shop.model.product.computerParts.RAM;
+
 
 public enum ElectronicTypes  {
     MOUSE("Logitech G305 Lightspeed", 229),

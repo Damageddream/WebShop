@@ -1,13 +1,11 @@
 package com.webshop.shop.app.controllers;
 
 import com.webshop.shop.app.controllers.options.ElectronicsMenu;
-import com.webshop.shop.app.controllers.options.SmartphoneMenu;
 import com.webshop.shop.exception.ProductUnvaliableException;
 import com.webshop.shop.io.ConsolePrinter;
 import com.webshop.shop.io.DataReader;
 import com.webshop.shop.model.cart.Cart;
 import com.webshop.shop.model.product.Electronic;
-import com.webshop.shop.model.product.Smartphone;
 import com.webshop.shop.model.warehouse.Warehouse;
 
 import java.util.InputMismatchException;

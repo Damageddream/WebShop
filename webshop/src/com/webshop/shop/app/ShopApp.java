@@ -1,11 +1,7 @@
     package com.webshop.shop.app;
 
     import com.webshop.shop.app.controllers.ShopController;
-    import com.webshop.shop.model.product.Computer;
-    import com.webshop.shop.model.product.computerParts.Cpus;
-    import com.webshop.shop.model.product.computerParts.Gpus;
-    import com.webshop.shop.model.product.computerParts.Harddrives;
-    import com.webshop.shop.model.product.computerParts.RAM;
+
     /**
      * The main entry point for the web shop application. This class is
      * responsible for displaying the application name,  initializing the primary

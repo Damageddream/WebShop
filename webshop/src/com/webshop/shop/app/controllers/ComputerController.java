@@ -7,7 +7,6 @@ import com.webshop.shop.io.ConsolePrinter;
 import com.webshop.shop.io.DataReader;
 import com.webshop.shop.model.cart.Cart;
 import com.webshop.shop.model.product.Computer;
-import com.webshop.shop.model.product.Product;
 import com.webshop.shop.model.warehouse.Warehouse;
 
 import java.util.InputMismatchException;

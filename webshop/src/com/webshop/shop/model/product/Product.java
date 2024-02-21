@@ -3,7 +3,7 @@ package com.webshop.shop.model.product;
 import com.webshop.shop.model.CsvConvertible;
 
 import java.util.Objects;
-import java.util.Scanner;
+
 
 /**
  * Represents an abstract base product within the web shop system. Products

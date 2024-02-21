@@ -1,7 +1,7 @@
 package com.webshop.shop.model.product.phoneParts;
 
 import com.webshop.shop.exception.NoSuchOptionException;
-import com.webshop.shop.model.product.electronicTypes.ElectronicTypes;
+
 
 public enum Camera {
     MP_200("200 megapixels", 400),

@@ -6,7 +6,7 @@ import com.webshop.shop.model.product.computerParts.Harddrives;
 import com.webshop.shop.model.product.computerParts.RAM;
 
 import java.util.Objects;
-import java.util.Scanner;
+
 
 public class Computer extends Product{
     private static final int MONTAGE_PRICE = 500;

@@ -1,6 +1,5 @@
 package com.webshop.shop.model.client;
 
-import com.webshop.shop.io.file.CsvFileManager;
 import com.webshop.shop.model.CsvConvertible;
 
 import java.time.ZoneId;

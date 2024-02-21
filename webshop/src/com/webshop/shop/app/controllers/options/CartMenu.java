@@ -4,7 +4,6 @@ import com.webshop.shop.exception.NoSuchOptionException;
 import com.webshop.shop.io.ConsolePrinter;
 import com.webshop.shop.io.DataReader;
 
-import javax.xml.crypto.Data;
 import java.util.InputMismatchException;
 
 public enum CartMenu {

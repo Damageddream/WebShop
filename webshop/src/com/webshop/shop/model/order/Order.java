@@ -5,7 +5,6 @@ import com.webshop.shop.model.CsvConvertible;
 import com.webshop.shop.model.cart.Cart;
 import com.webshop.shop.model.client.Client;
 
-import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
 
 public class Order implements CsvConvertible {
