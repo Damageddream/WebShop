@@ -3,11 +3,13 @@ package com.webshop.shop.io;
 import com.webshop.shop.exception.NoSuchOptionException;
 import com.webshop.shop.model.client.Client;
 import com.webshop.shop.model.product.Computer;
+import com.webshop.shop.model.product.Electronic;
 import com.webshop.shop.model.product.Smartphone;
 import com.webshop.shop.model.product.computerParts.Cpus;
 import com.webshop.shop.model.product.computerParts.Gpus;
 import com.webshop.shop.model.product.computerParts.Harddrives;
 import com.webshop.shop.model.product.computerParts.RAM;
+import com.webshop.shop.model.product.electronicTypes.ElectronicTypes;
 import com.webshop.shop.model.product.phoneParts.Camera;
 import com.webshop.shop.model.product.phoneParts.Color;
 import com.webshop.shop.model.product.phoneParts.Model;
@@ -71,6 +73,14 @@ public class DataReader {
         return new Smartphone("Personalized smartphone", 1, camera, color, model, storage);
     }
 
+    public Electronic readAndCreateElectronic() throws NoSuchOptionException{
+        printer.printLine("Choose electronic: ");
+        ElectronicTypes.printElectronicTypes();
+        ElectronicTypes electronic = ElectronicTypes.createFromInt(getInt());
+        return new Electronic("Personalaized electronic", 1, electronic);
+
+    }
+
     public Client readAndCreateUser(){
         printer.printLine("Name: ");
         String name = sc.nextLine();
@@ -82,5 +92,7 @@ public class DataReader {
         String email = sc.nextLine();
         return new Client(name, lastName, address, email);
     }
+
+
 
 }

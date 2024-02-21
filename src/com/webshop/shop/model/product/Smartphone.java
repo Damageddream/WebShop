@@ -5,6 +5,8 @@ import com.webshop.shop.model.product.phoneParts.Color;
 import com.webshop.shop.model.product.phoneParts.Model;
 import com.webshop.shop.model.product.phoneParts.Storage;
 
+import java.util.Objects;
+
 public class Smartphone extends Product{
 
     private Camera camera;
@@ -52,6 +54,20 @@ public class Smartphone extends Product{
 
     public void setStorage(Storage storage) {
         this.storage = storage;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        Smartphone that = (Smartphone) o;
+        return camera == that.camera && color == that.color && model == that.model && storage == that.storage;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), camera, color, model, storage);
     }
 
     @Override

@@ -6,7 +6,7 @@ import java.util.Objects;
 import java.util.Scanner;
 
 public abstract class Product implements CsvConvertible {
-    private static int idPool = 0;
+    private static int idPool = 1;
     private int id;
     private String name;
     private double price;
@@ -64,8 +64,8 @@ public abstract class Product implements CsvConvertible {
     }
 
     public Product(String name, int quantity) {
-        this.id = idPool+1;
-        Product.idPool += Product.idPool+1;
+        this.id = idPool;
+        Product.idPool++;
         this.name = name;
         this.quantity = quantity;
     }

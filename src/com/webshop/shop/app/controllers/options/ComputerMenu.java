@@ -17,7 +17,6 @@ public enum ComputerMenu {
     private String description;
 
 
-
     ComputerMenu(int value, String desc) {
         this.value = value;
         this.description = desc;

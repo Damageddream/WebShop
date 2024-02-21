@@ -70,7 +70,6 @@ public class Computer extends Product{
         return Objects.hash(super.hashCode(), cpu, gpu, ram, harddrive);
     }
 
-
     @Override
     double calcluatePrice() {
         return cpu.getPrice()+gpu.getPrice()+ram.getPrice()+ harddrive.getPrice()+MONTAGE_PRICE;

@@ -25,14 +25,14 @@ public enum ElectronicTypes  {
         this.price = price;
     }
 
-    static ElectronicTypes createFromInt(int choice) throws NoSuchOptionException {
+    public static ElectronicTypes createFromInt(int choice) throws NoSuchOptionException {
         try{
             return ElectronicTypes.values()[choice];
         } catch(ArrayIndexOutOfBoundsException e){
             throw new NoSuchOptionException("No option by id "+choice);
         }
     }
-    static void printElectronicTypes(){
+    public static void printElectronicTypes(){
         for (ElectronicTypes value : ElectronicTypes.values()) {
             System.out.println(value.ordinal()+" - "+value.name);
         }

@@ -4,40 +4,43 @@ import com.webshop.shop.exception.NoSuchOptionException;
 import com.webshop.shop.io.ConsolePrinter;
 import com.webshop.shop.io.DataReader;
 
-import javax.xml.crypto.Data;
 import java.util.InputMismatchException;
 
-public enum CartMenu {
+public enum CartItemMenu {
     GO_BACK(0, "Go Back"),
-    DISPLAY_CART(1, "Display and manage cart items"),
-    PROCESS_ORDER(2, "Process order");
+    UPDATE(1, "Update Item"),
+    DELETE(2, "Delete Item");
 
     private int value;
     private String description;
 
-    CartMenu(int value, String description) {
+
+
+    CartItemMenu(int value, String desc) {
         this.value = value;
-        this.description = description;
+        this.description = desc;
     }
+
     @Override
     public String toString() {
         return value + " - " + description;
     }
 
-    static CartMenu createFromInt(int option) throws NoSuchOptionException {
+    static CartItemMenu createFromInt(int option) throws NoSuchOptionException {
         try {
-            return CartMenu.values()[option];
+            return CartItemMenu.values()[option];
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new NoSuchOptionException("No option by id " + option);
         }
     }
-    public static CartMenu getOption(DataReader dataReader, ConsolePrinter printer) {
+
+    public static CartItemMenu getOption(DataReader dataReader, ConsolePrinter printer) {
         boolean optionOk = false;
-        CartMenu option = null;
+        CartItemMenu option = null;
         while (!optionOk) {
             try {
                 int num = dataReader.getInt();
-                option = CartMenu.createFromInt(num);
+                option = CartItemMenu.createFromInt(num);
                 optionOk = true;
             } catch (NoSuchOptionException e) {
                 printer.printLine(e.getMessage() + ", choose again.");
@@ -47,9 +50,10 @@ public enum CartMenu {
         }
         return option;
     }
-    public static void printCartMenu(ConsolePrinter printer) {
+
+    public static void printCartItemMenu(ConsolePrinter printer) {
         printer.printLine("Choose option: ");
-        for (CartMenu option : CartMenu.values()) {
+        for (CartItemMenu option : CartItemMenu.values()) {
             printer.printLine(option.toString());
         }
     }

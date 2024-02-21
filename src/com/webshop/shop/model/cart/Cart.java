@@ -1,11 +1,18 @@
 package com.webshop.shop.model.cart;
 
+import com.webshop.shop.exception.NoSuchOptionException;
 import com.webshop.shop.exception.ProductUnvaliableException;
+import com.webshop.shop.io.DataReader;
 import com.webshop.shop.model.CsvConvertible;
+import com.webshop.shop.model.product.Computer;
+import com.webshop.shop.model.product.Electronic;
 import com.webshop.shop.model.product.Product;
+import com.webshop.shop.model.product.Smartphone;
 
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.List;
+import java.util.Optional;
 
 public class Cart implements CsvConvertible {
 
@@ -32,19 +39,19 @@ public class Cart implements CsvConvertible {
         if(product.isAvailable()){
             cartProducts.add(product);
             product.setQuantity(product.getQuantity()-1);
-            totalPrice += totalPrice + product.getPrice();
+            totalPrice += product.getPrice();
         }else{
             throw new ProductUnvaliableException("Product not currently available, choose something else");
         }
     }
 
-    public boolean removeProduct(Product product){
+    public void removeProduct(Product product){
         if(cartProducts.contains(product)){
                 cartProducts.remove(product);
-                totalPrice -= totalPrice-product.getPrice();
-                return true;
+                totalPrice -= product.getPrice();
+        }else{
+            System.out.println("No such product in cart");
         }
-        return false;
     }
 
     public void displayCart(){
@@ -60,6 +67,41 @@ public class Cart implements CsvConvertible {
             System.out.println("and Total price is: "+totalPrice+"$");
         }
     }
+
+    public void updateProduct(Product productToUpdate, DataReader dataReader){
+        int index = cartProducts.indexOf(productToUpdate);
+        Product product = null;
+        try{
+            if(productToUpdate instanceof Computer){
+                product = dataReader.readAndCreateComputer();
+            }
+            else if (productToUpdate instanceof Smartphone){
+                product = dataReader.readAndCreateSmartphone();
+            } else if (productToUpdate instanceof Electronic) {
+                product = dataReader.readAndCreateElectronic();
+            }
+        }catch (NoSuchOptionException e){
+            System.out.println(e.getMessage());
+        }catch (InputMismatchException e){
+            System.out.println("Wrong input try again");
+        }
+        if(product == null){
+            System.out.println("You cannot update empty product");
+        }else{
+            cartProducts.set(index, product);
+            updateTotalPrice();
+        }
+    }
+
+    private void updateTotalPrice(){
+        if(!cartProducts.isEmpty()){
+            double newPrice = 0;
+            for (Product product : cartProducts) {
+                newPrice += product.getPrice();
+            }
+            totalPrice = newPrice;
+            }
+        }
 
     @Override
     public String toCsv() {

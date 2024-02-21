@@ -2,6 +2,8 @@ package com.webshop.shop.model.product;
 
 import com.webshop.shop.model.product.electronicTypes.ElectronicTypes;
 
+import java.util.Objects;
+
 public class Electronic extends Product{
 
     private ElectronicTypes electronic;
@@ -12,7 +14,19 @@ public class Electronic extends Product{
         this.setPrice(calcluatePrice());
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        Electronic that = (Electronic) o;
+        return electronic == that.electronic;
+    }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), electronic);
+    }
 
     @Override
     double calcluatePrice() {
